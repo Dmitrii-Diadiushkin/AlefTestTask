@@ -9,6 +9,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
+    
     private var personalDataLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +44,6 @@ class ViewController: UIViewController {
         button.setImage(imageSelected, for: .highlighted)
         button.setTitle("Добавить ребенка", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitleColor(.gray, for: .disabled)
         button.setTitleColor(.blue, for: .highlighted)
         
         button.layer.borderWidth = CGFloat(2.0)
@@ -72,9 +78,9 @@ class ViewController: UIViewController {
     fileprivate var childCounter: Int = 0 {
         didSet {
             if childCounter > 4 {
-                addChildButton.isEnabled = false
+                addChildButton.isHidden = true
             } else {
-                addChildButton.isEnabled = true
+                addChildButton.isHidden = false
             }
         }
     }
@@ -88,7 +94,30 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(hideKeyboardGesture)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWasShown),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillBeHidden),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
+    }
+    
     private func initialConfigure() {
+        configureScrollView()
         configurePersonalDataLabel()
         configurePersonalDataView()
         configureAddChildButton()
@@ -97,8 +126,19 @@ class ViewController: UIViewController {
         configureCleanButton()
     }
     
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: scrollView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: scrollView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        ])
+    }
+    
     private func configurePersonalDataLabel() {
-        view.addSubview(personalDataLabel)
+        scrollView.addSubview(personalDataLabel)
         
         guard let safeAreaTop = UIApplication.shared.windows.first?.safeAreaInsets.top else {
             print("Something wrong with safe area")
@@ -106,27 +146,27 @@ class ViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: personalDataLabel, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 15),
+            NSLayoutConstraint(item: personalDataLabel, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
             NSLayoutConstraint(item: personalDataLabel, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
-            NSLayoutConstraint(item: personalDataLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: safeAreaTop + 15)
+            NSLayoutConstraint(item: personalDataLabel, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: safeAreaTop + 15)
         ])
         
     }
     
     private func configurePersonalDataView() {
-        view.addSubview(personalDataView)
+        scrollView.addSubview(personalDataView)
         
         personalDataView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: personalDataView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 15),
+            NSLayoutConstraint(item: personalDataView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
             NSLayoutConstraint(item: personalDataView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
             NSLayoutConstraint(item: personalDataView, attribute: .top, relatedBy: .equal, toItem: personalDataLabel, attribute: .bottom, multiplier: 1, constant: 15)
         ])
     }
     
     private func configureAddChildButton() {
-        view.addSubview(addChildButton)
+        scrollView.addSubview(addChildButton)
         
         addChildButton.addTarget(self, action: #selector(addChildData), for: .touchUpInside)
         
@@ -140,27 +180,27 @@ class ViewController: UIViewController {
     }
     
     private func configureChildLabel() {
-        view.addSubview(childLabel)
+        scrollView.addSubview(childLabel)
         
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: childLabel, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 15),
+            NSLayoutConstraint(item: childLabel, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
             NSLayoutConstraint(item: childLabel, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
             NSLayoutConstraint(item: childLabel, attribute: .centerY, relatedBy: .equal, toItem: addChildButton, attribute: .centerY, multiplier: 1, constant: 0)
         ])
     }
     
     private func configureStackView() {
-        view.addSubview(childStackView)
+        scrollView.addSubview(childStackView)
         
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: childStackView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 15),
+            NSLayoutConstraint(item: childStackView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
             NSLayoutConstraint(item: childStackView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
             NSLayoutConstraint(item: childStackView, attribute: .top, relatedBy: .equal, toItem: addChildButton, attribute: .bottom, multiplier: 1, constant: 20)
         ])
     }
     
     private func configureCleanButton() {
-        view.addSubview(cleanButton)
+        scrollView.addSubview(cleanButton)
         
         cleanButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         
@@ -168,7 +208,8 @@ class ViewController: UIViewController {
             NSLayoutConstraint(item: cleanButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50),
             NSLayoutConstraint(item: cleanButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200),
             NSLayoutConstraint(item: cleanButton, attribute: .top, relatedBy: .equal, toItem: childStackView, attribute: .bottom, multiplier: 1, constant: 20),
-            NSLayoutConstraint(item: cleanButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: cleanButton, attribute: .centerX, relatedBy: .equal, toItem: scrollView, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: cleanButton, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0),
         ])
     }
     
@@ -200,6 +241,19 @@ class ViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @objc func keyboardWasShown(notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let keyboardSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+        self.scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillBeHidden(notification: Notification) {
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+    }
+    
     private func cleanData() {
         childCounter = 0
         personalDataView.cleanData()
@@ -211,7 +265,6 @@ class ViewController: UIViewController {
 
 extension ViewController: ChildDataViewDelegate {
     func removeView() {
-        print("Removing")
         childCounter -= 1
     }
 }
