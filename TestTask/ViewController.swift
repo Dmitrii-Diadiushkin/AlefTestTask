@@ -129,8 +129,13 @@ class ViewController: UIViewController {
     private func configureScrollView() {
         view.addSubview(scrollView)
         
+        guard let safeAreaTop = UIApplication.shared.windows.first?.safeAreaInsets.top else {
+            print("Something wrong with safe area")
+            return
+        }
+        
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: safeAreaTop + 15),
             NSLayoutConstraint(item: scrollView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: scrollView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
@@ -140,15 +145,10 @@ class ViewController: UIViewController {
     private func configurePersonalDataLabel() {
         scrollView.addSubview(personalDataLabel)
         
-        guard let safeAreaTop = UIApplication.shared.windows.first?.safeAreaInsets.top else {
-            print("Something wrong with safe area")
-            return
-        }
-        
         NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: personalDataLabel, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: 10),
             NSLayoutConstraint(item: personalDataLabel, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
-            NSLayoutConstraint(item: personalDataLabel, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
-            NSLayoutConstraint(item: personalDataLabel, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: safeAreaTop + 15)
+            NSLayoutConstraint(item: personalDataLabel, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15)
         ])
         
     }
@@ -159,9 +159,9 @@ class ViewController: UIViewController {
         personalDataView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: personalDataView, attribute: .top, relatedBy: .equal, toItem: personalDataLabel, attribute: .bottom, multiplier: 1, constant: 15),
             NSLayoutConstraint(item: personalDataView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
-            NSLayoutConstraint(item: personalDataView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
-            NSLayoutConstraint(item: personalDataView, attribute: .top, relatedBy: .equal, toItem: personalDataLabel, attribute: .bottom, multiplier: 1, constant: 15)
+            NSLayoutConstraint(item: personalDataView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15)
         ])
     }
     
@@ -173,8 +173,8 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: addChildButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50),
             NSLayoutConstraint(item: addChildButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200),
-            NSLayoutConstraint(item: addChildButton, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
-            NSLayoutConstraint(item: addChildButton, attribute: .top, relatedBy: .equal, toItem: personalDataView, attribute: .bottom, multiplier: 1, constant: 20)
+            NSLayoutConstraint(item: addChildButton, attribute: .top, relatedBy: .equal, toItem: personalDataView, attribute: .bottom, multiplier: 1, constant: 20),
+            NSLayoutConstraint(item: addChildButton, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15)
         ])
         
     }
@@ -193,9 +193,9 @@ class ViewController: UIViewController {
         scrollView.addSubview(childStackView)
         
         NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: childStackView, attribute: .top, relatedBy: .equal, toItem: addChildButton, attribute: .bottom, multiplier: 1, constant: 20),
             NSLayoutConstraint(item: childStackView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 15),
-            NSLayoutConstraint(item: childStackView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
-            NSLayoutConstraint(item: childStackView, attribute: .top, relatedBy: .equal, toItem: addChildButton, attribute: .bottom, multiplier: 1, constant: 20)
+            NSLayoutConstraint(item: childStackView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15)
         ])
     }
     
@@ -229,7 +229,7 @@ class ViewController: UIViewController {
                                       style: .cancel,
                                       handler: nil))
         
-        alert.addAction(UIAlertAction(title: "Очистить",
+        alert.addAction(UIAlertAction(title: "Сбросить данные",
                                       style: .destructive,
                                       handler: { [weak self] _ in
             self?.cleanData()

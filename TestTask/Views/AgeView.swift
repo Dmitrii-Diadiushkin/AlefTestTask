@@ -64,6 +64,6 @@ final class AgeView: UIView {
     }
     
     func cleanAge() {
-        ageTextField.text = ""
+        ageTextField.text = nil
     }
 }

@@ -63,6 +63,6 @@ final class NameView: UIView {
     }
     
     func cleanName() {
-        nameTextField.text = ""
+        nameTextField.text = nil
     }
 }
