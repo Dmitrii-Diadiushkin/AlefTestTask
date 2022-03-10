@@ -13,6 +13,10 @@
 		B9FED10827D927AC0049E531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9FED10627D927AC0049E531 /* Main.storyboard */; };
 		B9FED10A27D927AE0049E531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9FED10927D927AE0049E531 /* Assets.xcassets */; };
 		B9FED10D27D927AE0049E531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9FED10B27D927AE0049E531 /* LaunchScreen.storyboard */; };
+		B9FED11527D9283F0049E531 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FED11427D9283F0049E531 /* NameView.swift */; };
+		B9FED11727D937EB0049E531 /* AgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FED11627D937EB0049E531 /* AgeView.swift */; };
+		B9FED11927D938D00049E531 /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FED11827D938D00049E531 /* PersonalDataView.swift */; };
+		B9FED11B27D9448D0049E531 /* ChildDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FED11A27D9448D0049E531 /* ChildDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		B9FED10927D927AE0049E531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9FED10C27D927AE0049E531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9FED10E27D927AE0049E531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9FED11427D9283F0049E531 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
+		B9FED11627D937EB0049E531 /* AgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeView.swift; sourceTree = "<group>"; };
+		B9FED11827D938D00049E531 /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
+		B9FED11A27D9448D0049E531 /* ChildDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,10 @@
 				B9FED10927D927AE0049E531 /* Assets.xcassets */,
 				B9FED10B27D927AE0049E531 /* LaunchScreen.storyboard */,
 				B9FED10E27D927AE0049E531 /* Info.plist */,
+				B9FED11A27D9448D0049E531 /* ChildDataView.swift */,
+				B9FED11827D938D00049E531 /* PersonalDataView.swift */,
+				B9FED11427D9283F0049E531 /* NameView.swift */,
+				B9FED11627D937EB0049E531 /* AgeView.swift */,
 			);
 			path = TestTask;
 			sourceTree = "<group>";
@@ -139,6 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9FED10527D927AC0049E531 /* ViewController.swift in Sources */,
+				B9FED11727D937EB0049E531 /* AgeView.swift in Sources */,
+				B9FED11B27D9448D0049E531 /* ChildDataView.swift in Sources */,
+				B9FED11927D938D00049E531 /* PersonalDataView.swift in Sources */,
+				B9FED11527D9283F0049E531 /* NameView.swift in Sources */,
 				B9FED10127D927AC0049E531 /* AppDelegate.swift in Sources */,
 				B9FED10327D927AC0049E531 /* SceneDelegate.swift in Sources */,
 			);
