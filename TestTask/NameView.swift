@@ -61,4 +61,8 @@ final class NameView: UIView {
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         self.nameTextField.becomeFirstResponder()
     }
+    
+    func cleanName() {
+        nameTextField.text = ""
+    }
 }

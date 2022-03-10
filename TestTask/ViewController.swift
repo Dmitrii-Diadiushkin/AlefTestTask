@@ -56,6 +56,29 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    private var cleanButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Очистить", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.setTitleColor(.red, for: .highlighted)
+        
+        button.layer.borderWidth = CGFloat(2.0)
+        button.layer.borderColor = UIColor.systemRed.cgColor
+        button.layer.cornerRadius = 25
+        return button
+    }()
+    
+    fileprivate var childCounter: Int = 0 {
+        didSet {
+            if childCounter > 4 {
+                addChildButton.isEnabled = false
+            } else {
+                addChildButton.isEnabled = true
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -71,6 +94,7 @@ class ViewController: UIViewController {
         configureAddChildButton()
         configureChildLabel()
         configureStackView()
+        configureCleanButton()
     }
     
     private func configurePersonalDataLabel() {
@@ -104,13 +128,13 @@ class ViewController: UIViewController {
     private func configureAddChildButton() {
         view.addSubview(addChildButton)
         
-        addChildButton.addTarget(self, action: #selector(tempConfigureChildData), for: .touchUpInside)
+        addChildButton.addTarget(self, action: #selector(addChildData), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: addChildButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50),
             NSLayoutConstraint(item: addChildButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200),
             NSLayoutConstraint(item: addChildButton, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -15),
-            NSLayoutConstraint(item: addChildButton, attribute: .top, relatedBy: .equal, toItem: personalDataView, attribute: .bottom, multiplier: 1, constant: 10)
+            NSLayoutConstraint(item: addChildButton, attribute: .top, relatedBy: .equal, toItem: personalDataView, attribute: .bottom, multiplier: 1, constant: 20)
         ])
         
     }
@@ -135,19 +159,59 @@ class ViewController: UIViewController {
         ])
     }
     
-    @objc private func tempConfigureChildData() {
+    private func configureCleanButton() {
+        view.addSubview(cleanButton)
+        
+        cleanButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: cleanButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: cleanButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200),
+            NSLayoutConstraint(item: cleanButton, attribute: .top, relatedBy: .equal, toItem: childStackView, attribute: .bottom, multiplier: 1, constant: 20),
+            NSLayoutConstraint(item: cleanButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        ])
+    }
+    
+    @objc private func addChildData() {
+        childCounter += 1
         let childData = ChildDataView()
         childData.delegate = self
         childStackView.addArrangedSubview(childData)
     }
     
+    @objc func showAlert() {
+        let alert = UIAlertController(title: "Очистить данные?",
+                                      message: "Вы действительно хотите очистить введенные данные?",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Отмена",
+                                      style: .cancel,
+                                      handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "Очистить",
+                                      style: .destructive,
+                                      handler: { [weak self] _ in
+            self?.cleanData()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func hideKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    private func cleanData() {
+        childCounter = 0
+        personalDataView.cleanData()
+        childStackView.subviews.forEach { view in
+            view.removeFromSuperview()
+        }
     }
 }
 
 extension ViewController: ChildDataViewDelegate {
     func removeView() {
-         print("Removing")
+        print("Removing")
+        childCounter -= 1
     }
 }

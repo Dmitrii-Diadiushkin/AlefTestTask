@@ -62,4 +62,8 @@ final class AgeView: UIView {
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         self.ageTextField.becomeFirstResponder()
     }
+    
+    func cleanAge() {
+        ageTextField.text = ""
+    }
 }

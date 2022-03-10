@@ -41,4 +41,9 @@ final class PersonalDataView: UIView {
             NSLayoutConstraint(item: ageView, attribute: .top, relatedBy: .equal, toItem: nameView, attribute: .bottom, multiplier: 1, constant: 10)
         ])
     }
+    
+    func cleanData() {
+        nameView.cleanName()
+        ageView.cleanAge()
+    }
 }
