@@ -9,19 +9,27 @@
 /* Begin PBXBuildFile section */
 		B9D23FCE2907B91200C094B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FCD2907B91200C094B0 /* AppDelegate.swift */; };
 		B9D23FD02907B91200C094B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FCF2907B91200C094B0 /* SceneDelegate.swift */; };
-		B9D23FD22907B91200C094B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FD12907B91200C094B0 /* ViewController.swift */; };
+		B9D23FD22907B91200C094B0 /* PesonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FD12907B91200C094B0 /* PesonalDataViewController.swift */; };
 		B9D23FD72907B91200C094B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9D23FD62907B91200C094B0 /* Assets.xcassets */; };
 		B9D23FDA2907B91200C094B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D23FD82907B91200C094B0 /* LaunchScreen.storyboard */; };
+		B9D23FE52907D3D800C094B0 /* EditDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FE42907D3D800C094B0 /* EditDataView.swift */; };
+		B9D23FE72907D53900C094B0 /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FE62907D53900C094B0 /* PersonalDataView.swift */; };
+		B9D23FE92907D88700C094B0 /* ChildDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FE82907D88700C094B0 /* ChildDataView.swift */; };
+		B9D23FEF2907FA8600C094B0 /* AppText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D23FEE2907FA8600C094B0 /* AppText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B9D23FCA2907B91200C094B0 /* AlefTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlefTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D23FCD2907B91200C094B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9D23FCF2907B91200C094B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B9D23FD12907B91200C094B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B9D23FD12907B91200C094B0 /* PesonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PesonalDataViewController.swift; sourceTree = "<group>"; };
 		B9D23FD62907B91200C094B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9D23FD92907B91200C094B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9D23FDB2907B91200C094B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9D23FE42907D3D800C094B0 /* EditDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDataView.swift; sourceTree = "<group>"; };
+		B9D23FE62907D53900C094B0 /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
+		B9D23FE82907D88700C094B0 /* ChildDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDataView.swift; sourceTree = "<group>"; };
+		B9D23FEE2907FA8600C094B0 /* AppText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +62,66 @@
 		B9D23FCC2907B91200C094B0 /* AlefTestTask */ = {
 			isa = PBXGroup;
 			children = (
-				B9D23FCD2907B91200C094B0 /* AppDelegate.swift */,
-				B9D23FCF2907B91200C094B0 /* SceneDelegate.swift */,
-				B9D23FD12907B91200C094B0 /* ViewController.swift */,
+				B9D23FEA2907FA5000C094B0 /* App */,
+				B9D23FE12907D36A00C094B0 /* Flow */,
+				B9D23FED2907FA6700C094B0 /* Resources */,
 				B9D23FD62907B91200C094B0 /* Assets.xcassets */,
 				B9D23FD82907B91200C094B0 /* LaunchScreen.storyboard */,
 				B9D23FDB2907B91200C094B0 /* Info.plist */,
 			);
 			path = AlefTestTask;
+			sourceTree = "<group>";
+		};
+		B9D23FE12907D36A00C094B0 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				B9D23FE22907D37300C094B0 /* PersonalDataScreen */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		B9D23FE22907D37300C094B0 /* PersonalDataScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B9D23FE32907D38200C094B0 /* Views */,
+				B9D23FD12907B91200C094B0 /* PesonalDataViewController.swift */,
+			);
+			path = PersonalDataScreen;
+			sourceTree = "<group>";
+		};
+		B9D23FE32907D38200C094B0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9D23FE42907D3D800C094B0 /* EditDataView.swift */,
+				B9D23FE62907D53900C094B0 /* PersonalDataView.swift */,
+				B9D23FE82907D88700C094B0 /* ChildDataView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B9D23FEA2907FA5000C094B0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B9D23FEB2907FA5600C094B0 /* AppDelegates */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B9D23FEB2907FA5600C094B0 /* AppDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				B9D23FCD2907B91200C094B0 /* AppDelegate.swift */,
+				B9D23FCF2907B91200C094B0 /* SceneDelegate.swift */,
+			);
+			path = AppDelegates;
+			sourceTree = "<group>";
+		};
+		B9D23FED2907FA6700C094B0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B9D23FEE2907FA8600C094B0 /* AppText.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,9 +194,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9D23FD22907B91200C094B0 /* ViewController.swift in Sources */,
+				B9D23FE52907D3D800C094B0 /* EditDataView.swift in Sources */,
+				B9D23FE92907D88700C094B0 /* ChildDataView.swift in Sources */,
+				B9D23FD22907B91200C094B0 /* PesonalDataViewController.swift in Sources */,
 				B9D23FCE2907B91200C094B0 /* AppDelegate.swift in Sources */,
 				B9D23FD02907B91200C094B0 /* SceneDelegate.swift in Sources */,
+				B9D23FEF2907FA8600C094B0 /* AppText.swift in Sources */,
+				B9D23FE72907D53900C094B0 /* PersonalDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
